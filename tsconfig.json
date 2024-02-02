@@ -27,7 +27,8 @@
       "@middleware/*": ["middleware/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@validations/*": ["validations/*"]
+      "@validations/*": ["validations/*"],
+      "@lib/*": ["lib/*"],
     }
   },
   "include": ["src/**/*"],
