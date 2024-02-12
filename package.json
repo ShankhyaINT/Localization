@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rimraf dist/*",
     "copy-assets": "ts-node tools/copy-assets",
-    "lint": "eslint './src/**/*.ts'",
-    "lint:fix": "eslint './src/**/*.ts' --fix",
+    "lint": "eslint \"./src/**/*.ts\"",
+    "lint:fix": "eslint \"./src/**/*.ts\" --fix",
     "tsc": "tsc",
     "build": "npm-run-all clean lint tsc copy-assets",
     "dev:start": "npm-run-all build start",

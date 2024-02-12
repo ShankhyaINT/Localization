@@ -14,6 +14,7 @@ interface LocaleConfig {
 
 class LocalizationSDK {
   private i18nConfig: LocaleConfig;
+  public localeProvider = i18n;
 
   constructor(options?: LocaleConfig) {
     const defaultOptions: LocaleConfig = {
@@ -24,30 +25,30 @@ class LocalizationSDK {
     };
 
     this.i18nConfig = { ...defaultOptions, ...options };
-    i18n.configure(this.i18nConfig);
+    this.localeProvider.configure(this.i18nConfig);
   }
 
   translate(key: string, locale?: string): string {
-    return i18n.__({
+    return this.localeProvider.__({
       phrase: key,
       locale: locale || this.i18nConfig.defaultLocale,
     });
   }
 
   setLocale(locale: string): void {
-    i18n.setLocale(locale);
+    this.localeProvider.setLocale(locale);
   }
 
   getCurrentLocale(): string {
-    return i18n.getLocale();
+    return this.localeProvider.getLocale();
   }
 
   getAvailableLocales(): string[] {
-    return i18n.getLocales();
+    return this.localeProvider.getLocales();
   }
 
   getSupportedLanguages(): TranslationData {
-    return i18n.getCatalog(i18n.getLocale()) as TranslationData;
+    return this.localeProvider.getCatalog(this.localeProvider.getLocale()) as TranslationData;
   }
 }
 

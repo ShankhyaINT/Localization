@@ -4,12 +4,12 @@ import { connect as mongoConnect } from '@config/database/mongo';
 import { handleError } from '@config/handleErrors/handleError';
 import { morganConf } from '@config/logger/logger';
 import { StatusError } from '@config/statusError/statusError';
-import { LocalizationManager } from '@lib/localization';
 import { errors } from 'celebrate';
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import bearerToken from 'express-bearer-token';
 import swaggerUi from 'swagger-ui-express';
+import LocalizationManager from './lib/localization/config';
 import { v1Router } from './routes';
 
 class App {
@@ -32,14 +32,10 @@ class App {
    */
   private initializeI18n(): void {
     const localizationManager = new LocalizationManager({
-      locales: ["en"],
-      defaultLocale: "en",
-    })
-    this.app.use((req,res,next) => {
-      const locale = req.cookies.lang || req.headers['accept-language'] || localizationManager.getCurrentLocale();
-      localizationManager.setLocale(locale);
-      next();
+      locales: ['en'],
+      defaultLocale: 'en',
     });
+    this.app.use(localizationManager.localeProvider.init);
   }
 
   /**
