@@ -32,11 +32,14 @@ class App {
    */
   private initializeI18n(): void {
     const localizationManager = new LocalizationManager({
-      locales: ["en"],
-      defaultLocale: "en",
-    })
-    this.app.use((req,res,next) => {
-      const locale = req.cookies.lang || req.headers['accept-language'] || localizationManager.getCurrentLocale();
+      locales: ['en'],
+      defaultLocale: 'en',
+    });
+    this.app.use((req, res, next) => {
+      const locale =
+        req.cookies.lang ||
+        req.headers['accept-language'] ||
+        localizationManager.getCurrentLocale();
       localizationManager.setLocale(locale);
       next();
     });
