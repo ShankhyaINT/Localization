@@ -1,2 +1,2 @@
-export { default as locale } from "./config";
+export { default as LocalizationManager } from "./config";
 

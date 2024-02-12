@@ -8,10 +8,10 @@ interface TranslationData {
 
 
 interface LocaleConfig {
-    locales: string[];
-    directory: string;
-    defaultLocale: string;
-    objectNotation: boolean;
+    locales?: string[];
+    directory?: string;
+    defaultLocale?: string;
+    objectNotation?: boolean;
 }
 
 class LocalizationSDK {
@@ -55,4 +55,5 @@ class LocalizationSDK {
 
 }
 
-export default new LocalizationSDK();
+
+export default LocalizationSDK;

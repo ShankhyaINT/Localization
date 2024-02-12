@@ -1,17 +1,16 @@
+import * as swaggerDocument from '@assets/swagger/swagger.json';
+import { addRequestId } from '@config/addRequestId/addRequestId';
+import { connect as mongoConnect } from '@config/database/mongo';
+import { handleError } from '@config/handleErrors/handleError';
+import { morganConf } from '@config/logger/logger';
+import { StatusError } from '@config/statusError/statusError';
+import { LocalizationManager } from '@lib/localization';
+import { errors } from 'celebrate';
+import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import bearerToken from 'express-bearer-token';
-import { resolve } from 'path';
-import cors from 'cors';
-import { connect as mongoConnect } from '@config/database/mongo';
-import { v1Router } from './routes';
-import * as i18n from 'i18n';
 import swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from '@assets/swagger/swagger.json';
-import { handleError } from '@config/handleErrors/handleError';
-import { errors } from 'celebrate';
-import { morganConf } from '@config/logger/logger';
-import { addRequestId } from '@config/addRequestId/addRequestId';
-import { StatusError } from '@config/statusError/statusError';
+import { v1Router } from './routes';
 
 class App {
   public app: Application;
@@ -32,11 +31,15 @@ class App {
    * default language english.
    */
   private initializeI18n(): void {
-    i18n.configure({
-      locales: ['en'],
-      directory: resolve(__dirname, './assets/locales'),
+    const localizationManager = new LocalizationManager({
+      locales: ["en"],
+      defaultLocale: "en",
+    })
+    this.app.use((req,res,next) => {
+      const locale = req.cookies.lang || req.headers['accept-language'] || localizationManager.getCurrentLocale();
+      localizationManager.setLocale(locale);
+      next();
     });
-    this.app.use(i18n.init);
   }
 
   /**
