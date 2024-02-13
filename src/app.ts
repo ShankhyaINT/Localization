@@ -14,8 +14,14 @@ import { v1Router } from './routes';
 
 class App {
   public app: Application;
+  public localizationManager: LocalizationManager;
 
   constructor() {
+    this.localizationManager = LocalizationManager.getInstance({
+      locales: ['en', 'fr'],
+      defaultLocale: 'fr',
+      register: global,
+    });
     this.app = express();
     this.initializeSwagger();
     this.initializeI18n();
@@ -31,11 +37,7 @@ class App {
    * default language english.
    */
   private initializeI18n(): void {
-    const localizationManager = new LocalizationManager({
-      locales: ['en'],
-      defaultLocale: 'en',
-    });
-    this.app.use(localizationManager.localeProvider.init);
+    this.localizationManager.initialize(this.app);
   }
 
   /**
@@ -80,7 +82,8 @@ class App {
    * Overriding the express response.
    */
   private overrideExpressResponse(): void {
-    this.app.use(errors());
+    // this.app.use(errors());
+    this.app.use(this.localizationManager.manageValidationError);
     this.app.use(handleError);
   }
 
