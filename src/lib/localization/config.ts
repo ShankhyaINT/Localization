@@ -63,7 +63,6 @@ class LocalizationSDK {
 
   manageValidationError(err: Error, req: Request, res: Response, next: NextFunction) {
     if (isCelebrateError(err)) {
-      console.log(err);
       const validationMessage = 'celebrate request validation failed';
       res.locals.error = res.__(validationMessage);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -74,8 +73,6 @@ class LocalizationSDK {
         validation: {},
       };
       err.details.forEach((value, item) => {
-        console.log(value);
-        console.log(item);
         respObject['validation'][item] = {
           source: `${item}`,
           keys: value?.details?.[0]?.['path'],
