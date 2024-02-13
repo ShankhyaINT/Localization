@@ -4,7 +4,7 @@ import { connect as mongoConnect } from '@config/database/mongo';
 import { handleError } from '@config/handleErrors/handleError';
 import { morganConf } from '@config/logger/logger';
 import { StatusError } from '@config/statusError/statusError';
-import { errors } from 'celebrate';
+// import { errors } from 'celebrate';
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import bearerToken from 'express-bearer-token';

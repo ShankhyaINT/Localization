@@ -14,5 +14,7 @@
   "passwordRequired": "Password Required",
   "invalidPassword": "Invalid password",
   "duplicateEmail": "Duplicate email found",
-  "invalidEmailOrPassword": "Invalid email or password"
+  "invalidEmailOrPassword": "Invalid email or password",
+  "healthCheck": "checking for health in en",
+  "\"text\" is required": "validation check in en"
 }
