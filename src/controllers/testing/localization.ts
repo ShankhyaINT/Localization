@@ -8,7 +8,6 @@ export const localizationTest = controller(async (req: Request, res: Response): 
 
 export const localizationValidationCheck = controller(
   async (req: Request, res: Response): Promise<void> => {
-    const body = req.body;
-    res.send({ status: res.__(body.text) });
+    res.send({ status: res.__('healthCheck') });
   },
 );
