@@ -7,12 +7,8 @@ interface TranslationData {
   [key: string]: string;
 }
 
-interface LocaleConfig extends i18n.ConfigurationOptions {
-  validationMessage?: string;
-}
-
 class LocalizationSDK {
-  private i18nConfig: LocaleConfig; // Configuration options for i18n module
+  private i18nConfig: i18n.ConfigurationOptions; // Configuration options for i18n module
   public localeProvider = i18n; // Exposing i18n module for localization
   private static instance: LocalizationSDK; // Singleton instance of the LocalizationSDK class
 
@@ -21,9 +17,9 @@ class LocalizationSDK {
    * @param options Optional configuration options for i18n module
    * @returns A new instance of the LocalizationSDK class
    */
-  private constructor(options?: LocaleConfig) {
+  private constructor(options?: i18n.ConfigurationOptions) {
     // Default configuration options for i18n module
-    const defaultOptions: LocaleConfig = {
+    const defaultOptions: i18n.ConfigurationOptions = {
       locales: ['en', 'fr', 'es'],
       directory: path.join(__dirname, '..', '..', 'assets', 'locales'),
       defaultLocale: 'en',
