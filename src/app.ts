@@ -9,7 +9,7 @@ import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import bearerToken from 'express-bearer-token';
 import swaggerUi from 'swagger-ui-express';
-import LocalizationManager from '@lib/localization/config';
+import { LocalizationManager } from '@lib/localization';
 import { v1Router } from './routes';
 
 class App {
