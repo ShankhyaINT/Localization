@@ -6,7 +6,8 @@ import { Application, NextFunction, Request, Response } from 'express';
 interface TranslationData {
   [key: string]: string;
 }
-
+// This is for global state management.Global assumes we share a common state of localization in any time and any part of our app. This is usually fine in cli-style scripts. When serving responses to http requests we'll need to make sure that scope is NOT shared globally but attached to your request object.
+// For mmore info visit https://www.npmjs.com/package/i18n#cli-within-global-scope
 class LocalizationSDK {
   private i18nConfig: i18n.ConfigurationOptions; // Configuration options for i18n module
   public localeProvider = i18n; // Exposing i18n module for localization
